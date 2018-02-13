@@ -1,0 +1,10 @@
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.exe.config
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.csprojResolveAssemblyReference.cache
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.exe
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.pdb
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTran.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Newtonsoft.Json.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTran.pdb
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Newtonsoft.Json.xml
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.exe
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.pdb

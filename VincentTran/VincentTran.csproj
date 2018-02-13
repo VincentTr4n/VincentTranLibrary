@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{941F114E-D3A7-48EE-ABCE-8A23FF57C8A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VincentTran</RootNamespace>
+    <AssemblyName>VincentTran</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\..\Practice_DotNet\PhieuNhap_Clone\MyProject01\bin\Debug\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\..\BaiTapLon_ComputerStore\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\TestFacebookAPI\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algorithms\DataStructures\BinaryTree.cs" />
+    <Compile Include="Algorithms\DataStructures\CartesianTree.cs" />
+    <Compile Include="Algorithms\DataStructures\CartesianTreeBasic.cs" />
+    <Compile Include="Algorithms\DataStructures\DisjointSetUnion.cs" />
+    <Compile Include="Algorithms\DataStructures\DisjointSetUnionNaive.cs" />
+    <Compile Include="Algorithms\DataStructures\FenwickTree.cs" />
+    <Compile Include="Algorithms\DataStructures\HashTbl.cs" />
+    <Compile Include="Algorithms\DataStructures\SLinkedList.cs" />
+    <Compile Include="Algorithms\DataStructures\MaxSegmentTree.cs" />
+    <Compile Include="Algorithms\DataStructures\MinSegmentTree.cs" />
+    <Compile Include="Algorithms\DataStructures\Pair.cs" />
+    <Compile Include="Algorithms\DataStructures\PriorityQueue.cs" />
+    <Compile Include="Algorithms\DataStructures\SLinkedListWithKey.cs" />
+    <Compile Include="Algorithms\DataStructures\SplayTree.cs" />
+    <Compile Include="Algorithms\DataStructures\Trie.cs" />
+    <Compile Include="Algorithms\DataStructures\Vector.cs" />
+    <Compile Include="Algorithms\Graphs\GraphSearch.cs" />
+    <Compile Include="Algorithms\Graphs\GraphWithWeight.cs" />
+    <Compile Include="Algorithms\Graphs\MaxFlowGraph.cs" />
+    <Compile Include="Algorithms\Graphs\GeneralGraph.cs" />
+    <Compile Include="Algorithms\HammingEncoding.cs" />
+    <Compile Include="Algorithms\SearchAlgo.cs" />
+    <Compile Include="Algorithms\SortAlgo.cs" />
+    <Compile Include="JudgeAPI\DetailSubmit.cs" />
+    <Compile Include="JudgeAPI\JudgeLanguage.cs" />
+    <Compile Include="JudgeAPI\JudgeProvider.cs" />
+    <Compile Include="JudgeAPI\JudgeRequest.cs" />
+    <Compile Include="JudgeAPI\JudgeService.cs" />
+    <Compile Include="JudgeAPI\ResultSubmit.cs" />
+    <Compile Include="JudgeAPI\JudgeStatus.cs" />
+    <Compile Include="MachineLearning\NaiveBayes.cs" />
+    <Compile Include="Utilities\MyBigInteger.cs" />
+    <Compile Include="Facebook\FacebookAccount.cs" />
+    <Compile Include="Facebook\FacebookProvider.cs" />
+    <Compile Include="Facebook\FacebookService.cs" />
+    <Compile Include="Facebook\FacebookSettings.cs" />
+    <Compile Include="Facebook\FacebookFriends.cs" />
+    <Compile Include="Facebook\FacebookLiked.cs" />
+    <Compile Include="Geometry\GeometryUtils.cs" />
+    <Compile Include="Geometry\PointInt2D.cs" />
+    <Compile Include="Helpers\CollectionHelpers.cs" />
+    <Compile Include="Helpers\BitHelpers.cs" />
+    <Compile Include="Helpers\DateTimeHelpers.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Helpers\ObjectParse.cs" />
+    <Compile Include="Helpers\NumberToWords.cs" />
+    <Compile Include="Helpers\Strings\AhoCorasickTree.cs" />
+    <Compile Include="Helpers\Strings\RandomStringGenerator.cs" />
+    <Compile Include="Helpers\Strings\StringHelpers.cs" />
+    <Compile Include="IO\Scanner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLServer\MyConnect.cs" />
+    <Compile Include="Cryptography\StringEncoder.cs" />
+    <Compile Include="Helpers\ExcelHelpers.cs" />
+    <Compile Include="Utilities\Fraction.cs" />
+    <Compile Include="Utilities\Matrix\MatchingUtils.cs" />
+    <Compile Include="Utilities\Matrix\MatrixInt.cs" />
+    <Compile Include="Utilities\Matrix\MatrixLong.cs" />
+    <Compile Include="Utilities\Matrix\MatrixUtils.cs" />
+    <Compile Include="Utilities\MyComparer.cs" />
+    <Compile Include="Utilities\NumTheoryUtils.cs" />
+    <Compile Include="Utilities\PermutationUtils.cs" />
+    <Compile Include="Utilities\PolynomialHash.cs" />
+    <Compile Include="Utilities\SequenceUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

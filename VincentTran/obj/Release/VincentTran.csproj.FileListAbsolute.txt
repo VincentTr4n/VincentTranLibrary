@@ -1,0 +1,10 @@
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\VincentTran.dll.config
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\VincentTran.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\VincentTran.pdb
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\Dapper.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\Newtonsoft.Json.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\Dapper.xml
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Release\Newtonsoft.Json.xml
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Release\VincentTran.dll
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Release\VincentTran.pdb
+D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Release\VincentTran.csprojResolveAssemblyReference.cache

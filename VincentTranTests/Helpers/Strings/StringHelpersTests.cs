@@ -1,0 +1,281 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using VincentTran.Helpers.Strings;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace VincentTran.Helpers.Strings.Tests
+{
+	[TestClass()]
+	public class StringHelpersTests
+	{
+		[TestMethod]
+		public void SuffixArrayTests()
+		{
+			string s = "banana";
+			var res = StringHelpers.GetSuffixArray(s, 'a', 'z');
+			var resNaive = StringHelpers.GetSuffixArrayNaive(s);
+			AssertArraysAreEqual(resNaive, res, s);
+
+			for (int len = 1; len <= 6; ++len)
+			{
+				int up = 1;
+				for (int i = 1; i <= len; ++i) up *= len;
+				for (int mask = 0; mask < up; ++mask)
+				{
+					s = "";
+					int x = mask;
+					for (int i = 0; i < len; ++i)
+					{
+						s += (char)((x % len) + 'a');
+						x /= len;
+					}
+					res = StringHelpers.GetSuffixArray(s, 'a', 'a' + len - 1);
+					resNaive = StringHelpers.GetSuffixArrayNaive(s);
+					AssertArraysAreEqual(resNaive, res, s);
+
+					int[] lcpNaive = StringHelpers.GetLCPNaive(s, resNaive);
+					int[] lcp = StringHelpers.GetLCP(s, res);
+					AssertArraysAreEqual(lcpNaive, lcp, s.Length - 1);
+
+					res = StringHelpers.GetSuffixArrayCyclic(s, 'a' + len - 1);
+					bool[] was = new bool[s.Length];
+					for (int i = 0; i < s.Length; ++i)
+						was[res[i]] = true;
+					for (int i = 0; i < s.Length; ++i)
+						Assert.IsTrue(was[i]);
+					Assert.AreEqual(s.Length, res.Length);
+					for (int i = 0; i < s.Length - 1; ++i)
+					{
+						Assert.IsTrue(string.CompareOrdinal((s.Substring(res[i]) + s.Substring(0, res[i])),
+							s.Substring(res[i + 1]) + s.Substring(0, res[i + 1])) <= 0);
+					}
+				}
+			}
+		}
+
+		[TestMethod]
+		public void ZAlgorithmTests()
+		{
+			for (int len = 1; len <= 6; ++len)
+			{
+				int up = 1;
+				for (int i = 1; i <= len; ++i) up *= len;
+				for (int mask = 0; mask < up; ++mask)
+				{
+					var s = "";
+					int x = mask;
+					for (int i = 0; i < len; ++i)
+					{
+						s += (char)((x % len) + 'a');
+						x /= len;
+					}
+					var res = StringHelpers.ZAlgorithm(s.ToCharArray());
+					var resNaive = StringHelpers.ZAlgorithmNaive(s.ToCharArray());
+					AssertArraysAreEqual(resNaive, res, s);
+				}
+			}
+		}
+
+		[TestMethod]
+		public void AhoCorasickTests()
+		{
+			var rnd = new Random(123);
+			for (int test = 0; test < 100; ++test)
+			{
+				int n = rnd.Next(10) + 1;
+				var patterns = new char[n][];
+				var allpat = new HashSet<string>();
+				for (int i = 0; i < n; ++i)
+				{
+					while (true)
+					{
+						int len = rnd.Next(10) + 1;
+						patterns[i] = new char[len];
+						for (int j = 0; j < len; ++j)
+							patterns[i][j] = (char)('a' + rnd.Next(4));
+						if (!allpat.Contains(new string(patterns[i])))
+						{
+							allpat.Add(new string(patterns[i]));
+							break;
+						}
+					}
+				}
+				var tree = StringHelpers.GetAhoCorasickTree(patterns, 'a', 'z');
+				var strLen = rnd.Next(1000) + 10;
+				var s = new char[strLen];
+				for (int i = 0; i < strLen; ++i) s[i] = (char)('a' + rnd.Next(26));
+				var matches = tree.CountMatches(s);
+
+				long brute = 0;
+				var str = new string(s);
+				for (int i = 0; i < patterns.Length; ++i)
+				{
+					var pat = new string(patterns[i]);
+					int p = str.IndexOf(pat);
+					while (p != -1)
+					{
+						++brute;
+						p = str.IndexOf(pat, p + 1);
+					}
+				}
+				Assert.AreEqual(brute, matches);
+			}
+		}
+
+		[TestMethod]
+		public void PrefixTests()
+		{
+			var rnd = new Random(123);
+			for (int times = 0; times < 10000; times++)
+			{
+				int l = rnd.Next(20) + 1;
+				var ch = new char[l];
+				for (int i = 0; i < l; i++)
+				{
+					ch[i] = (char)(rnd.Next(3) + 'a');
+				}
+
+				var s = new string(ch);
+				var my = StringHelpers.GetPrefixFunction(s);
+				var correct = GetPrefixFunctionNaive(s);
+				Assert.IsTrue(correct.SequenceEqual(my));
+
+				var myPeriod = StringHelpers.GetStringCyclicPeriod(s);
+				var correctPeriod = GetCyclicPeriodNaive(s);
+				Assert.AreEqual(correctPeriod, myPeriod);
+
+				myPeriod = StringHelpers.GetStringLinearPeriod(s);
+				correctPeriod = GetLinearPeriodNaive(s);
+				Assert.AreEqual(correctPeriod, myPeriod);
+			}
+		}
+
+		[TestMethod]
+		public void PalindromesMustWork()
+		{
+			var rnd = new Random(123);
+			for (int tests = 0; tests < 10000; tests++)
+			{
+				var len = rnd.Next(100) + 1;
+				var c = new char[len];
+				for (int i = 0; i < len; i++)
+				{
+					c[i] = (char)('a' + rnd.Next(3));
+				}
+				var s = new string(c);
+
+				int[] oddCorrect, evenCorrect, oddMy, evenMy;
+				GetAllPalindromesNaive(s, out oddCorrect, out evenCorrect);
+				StringHelpers.GetAllPalindromes(s, out oddMy, out evenMy);
+
+				Assert.IsTrue(oddMy.SequenceEqual(oddCorrect));
+				Assert.IsTrue(evenMy.SequenceEqual(evenCorrect));
+			}
+		}
+
+		#region Helper methods
+
+		private static void GetAllPalindromesNaive(string s, out int[] oddLength, out int[] evenLength)
+		{
+			int n = s.Length;
+			oddLength = new int[n];
+			for (int i = 0; i < n; i++)
+			{
+				int l = i - 1, r = i + 1;
+				while (l >= 0 && r < n && s[l] == s[r])
+				{
+					--l;
+					++r;
+				}
+				oddLength[i] = r - l - 1;
+			}
+			evenLength = new int[n];
+			for (int i = 0; i < n; i++)
+			{
+				int l = i - 1, r = i;
+				while (l >= 0 && r < n && s[l] == s[r])
+				{
+					--l;
+					++r;
+				}
+				evenLength[i] = r - l - 1;
+			}
+		}
+
+		private void AssertArraysAreEqual(int[] a, int[] b, string text, int len)
+		{
+			Assert.AreEqual(len, a.Length, text);
+			Assert.AreEqual(len, b.Length, text);
+			for (int i = 0; i < len; ++i)
+				Assert.AreEqual(a[i], b[i], "Position " + i + " differs. Text: " + text);
+		}
+
+		private void AssertArraysAreEqual(int[] a, int[] b, string text)
+		{
+			Assert.AreEqual(text.Length, a.Length, text);
+			Assert.AreEqual(text.Length, b.Length, text);
+			for (int i = 0; i < text.Length; ++i)
+				Assert.AreEqual(a[i], b[i], "Position " + i + " differs. Text: " + text);
+		}
+
+		private void AssertArraysAreEqual(int[] a, int[] b, int len)
+		{
+			Assert.AreEqual(len, a.Length);
+			Assert.AreEqual(len, b.Length);
+			for (int i = 0; i < len; ++i)
+				Assert.AreEqual(a[i], b[i], "Position " + i + " differs");
+		}
+
+		private int[] GetPrefixFunctionNaive(string s)
+		{
+			var p = new int[s.Length];
+			for (int i = 1; i < s.Length; i++)
+			{
+				for (int j = 1; j <= i; ++j)
+					if (s.StartsWith(s.Substring(j, i - j + 1)))
+					{
+						p[i] = i - j + 1;
+						break;
+					}
+			}
+			return p;
+		}
+
+		private int GetCyclicPeriodNaive(string s)
+		{
+			string t = s;
+			for (int i = 0; i < s.Length; ++i)
+			{
+				t = t.Substring(1) + t[0];
+				if (t == s)
+					return i + 1;
+			}
+			throw new Exception();
+		}
+
+		private int GetLinearPeriodNaive(string s)
+		{
+			for (int i = 1; i < s.Length; ++i)
+			{
+				bool ok = true;
+
+				for (int j = 0; j < s.Length; j++)
+				{
+					if (s[j] != s[j % i])
+					{
+						ok = false;
+						break;
+					}
+				}
+
+				if (ok) return i;
+			}
+			return s.Length;
+		}
+
+		#endregion
+	}
+}
