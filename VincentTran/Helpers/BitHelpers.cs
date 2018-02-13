@@ -63,6 +63,22 @@ namespace VincentTran.Helpers
 		public static bool IsPowerOfTwo(this long x) => x > 0 && (x & (x - 1)) == 0;
 
 		/// <summary>
+		/// Find maximun xor bit of two number L,R ( max(i xor j) with i,j in [L,R])
+		/// </summary>
+		/// <returns></returns>
+		public static int MaximumXOR(int left,int right)
+		{
+			int num = left ^ right, max = 0;
+			while (num > 0)
+			{
+				max <<= 1;
+				max |= 1;
+				num >>= 1;
+			}
+			return max;
+		}
+
+		/// <summary>
 		/// Convert a 32-bit signed integer (Convert to a character) to Binary
 		/// </summary>
 		/// <returns></returns>

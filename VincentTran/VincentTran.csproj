@@ -83,6 +83,7 @@
     <Compile Include="JudgeAPI\JudgeService.cs" />
     <Compile Include="JudgeAPI\ResultSubmit.cs" />
     <Compile Include="JudgeAPI\JudgeStatus.cs" />
+    <Compile Include="MachineLearning\LinearRegression.cs" />
     <Compile Include="MachineLearning\NaiveBayes.cs" />
     <Compile Include="Utilities\MyBigInteger.cs" />
     <Compile Include="Facebook\FacebookAccount.cs" />
