@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using VincentTran.Algorithms.DataStructures;
 
 namespace VincentTran.MachineLearning
@@ -26,6 +26,17 @@ namespace VincentTran.MachineLearning
 				else TestSet.Add(cur);
 			}
 		}
+		public void LoadTest(string fileName)
+		{
+			var buffer = System.IO.File.ReadAllLines(fileName);
+			foreach (var item in buffer)
+			{
+				var values = item.Split(',');
+				Vector<double> cur = new Vector<double>();
+				foreach (var val in values) cur.Add(double.Parse(val));
+				TestSet.Add(cur);
+			}
+		}
 		private double average(Vector<double> vector)
 		{
 			double res = 0;
@@ -48,14 +59,15 @@ namespace VincentTran.MachineLearning
 			double e = Math.Exp(-Math.Pow(x - avg, 2) / (2 * Math.Pow(s, 2)));
 			return ((double)1.0 / (Math.Sqrt(2 * Math.PI) * s)) * e;
 		}
-		public Vector<Vector<Vector<double>>> separateByClass(Vector<Vector<double>> vector)
+		public Vector<Vector<Vector<double>>> separateByClass(Vector<Vector<double>> vector,int num)
 		{
-			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(2);
+			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(num);
+			for (int i = 0; i < num; i++) res[i] = new Vector<Vector<double>>();
 			foreach (var item in vector)
 			{
 				int last = item.Count - 1;
 				int val = (int)item[last];
-				if (res[val] == null) res[val] = new Vector<Vector<double>>();
+				//if (res[val] == null) res[val] = new Vector<Vector<double>>();
 				res[val].Add(item);
 			}
 			return res;
@@ -63,7 +75,7 @@ namespace VincentTran.MachineLearning
 		private Vector<Pair<double, double>> summarize(Vector<Vector<double>> vector)
 		{
 			Vector<Pair<double, double>> res = new Vector<Pair<double, double>>();
-			int n = vector[0].Count - 1;
+			int n = (vector.Count==0) ? 0 : vector[0].Count - 1 ;//vector[0].Count - 1;
 			for (int i = 0; i < n; i++)
 			{
 				Vector<double> temp = new Vector<double>();
@@ -72,9 +84,9 @@ namespace VincentTran.MachineLearning
 			}
 			return res;
 		}
-		public Vector<Vector<Pair<double, double>>> summarizeByClass(Vector<Vector<double>> vector)
+		public Vector<Vector<Pair<double, double>>> summarizeByClass(Vector<Vector<double>> vector,int num)
 		{
-			var S = separateByClass(vector);
+			var S = separateByClass(vector,num);
 			Vector<Vector<Pair<double, double>>> res = new Vector<Vector<Pair<double, double>>>();
 			foreach (var item in S) res.Add(summarize(item));
 			return res;
@@ -93,14 +105,17 @@ namespace VincentTran.MachineLearning
 					double x = input[j];
 					res[i] *= calProbability(x, avg, s);
 				}
-
+				if (res[i] == 1) res[i] = double.MinValue;
 			}
 			return res;
 		}
 		private int predict(Vector<Vector<Pair<double, double>>> summarize, Vector<double> input)
 		{
 			var prob = calculateClassProbabilities(summarize, input);
-			return (prob[0] <= prob[1]) ? 1 : 0;
+			double max = prob.Max();
+			int index = 0;
+			for (int i = 0; i < prob.Count; i++) if (prob[i] == max) { index = i; break; }
+			return index;
 		}
 		public Vector<int> Predictions(Vector<Vector<Pair<double, double>>> summarize, Vector<Vector<double>> vector)
 		{

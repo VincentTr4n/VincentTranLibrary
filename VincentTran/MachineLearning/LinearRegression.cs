@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using VincentTran.Algorithms.DataStructures;
 
 namespace VincentTran.MachineLearning
@@ -23,6 +22,9 @@ namespace VincentTran.MachineLearning
 				VY.Add(double.Parse(temp[1]));
 			}
 		}
+		/// <summary>
+		/// Math equation linear : Y = B1*X + B0
+		/// </summary>
 		public void Solve(out double B0,out double B1)
 		{
 			double xbar = VX.Sum() / VX.Count;
@@ -35,8 +37,8 @@ namespace VincentTran.MachineLearning
 				yybar += (VY[i] - ybar) * (VY[i] - ybar);
 				xybar += (VX[i] - xbar) * (VY[i] - ybar);
 			}
-			B0 = xybar/xxbar;
-			B1 = ybar - B0*xbar;
+			B1 = xybar/xxbar;
+			B0 = ybar - B1*xbar;
 		}
 	}
 }

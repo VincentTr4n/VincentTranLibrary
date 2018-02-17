@@ -43,20 +43,29 @@ namespace VincentTranTestConsole
 			//	Console.WriteLine(item);
 			//}
 
-			int[] temp = new int[1001];
-			for (int i = 1; i <= 100; i++)
-			{
-				for (int j = i; j <= 100; j += i) if ((i & 1) != 0) temp[j] += i;
-			}
-			for (int i = 1; i <= 100; i++) temp[i] += temp[i - 1];
-			foreach (var item in temp)
-			{
-				Console.WriteLine(item);
-			}
+			//double b1, b0;
+			//LinearRegression linear = new LinearRegression();
+			//linear.LoadData("data1.csv");
+			//linear.Solve(out b0, out b1);
+			//Console.WriteLine("Y = "+b1+"*X"+(b0 < 0 ? " "+b0 : " +" + b0));
+			//var res = 145 * b1 + b0;
+			//Console.WriteLine(res);
 
 
-			//NaiveBayes na = new NaiveBayes("data.csv", 300);
-			//var summarize = na.summarizeByClass(na.TrainingSet);
+			//var temp = System.IO.File.ReadAllLines("test-features.txt");
+			//System.Text.StringBuilder builder = new System.Text.StringBuilder();
+			//foreach (var item in temp)
+			//{
+			//	var str = item.Trim().Replace(' ', ',');
+			//	builder.AppendLine(str);
+			//}
+			//System.IO.File.WriteAllText("test1.csv", "");
+			//System.IO.File.WriteAllText("test1.csv", builder.ToString());
+
+
+			NaiveBayes na = new NaiveBayes("data.csv", 700);
+			var summarize = na.summarizeByClass(na.TrainingSet, 2);
+
 			//foreach (var item in summarize)
 			//{
 			//	Console.WriteLine();
@@ -66,13 +75,13 @@ namespace VincentTranTestConsole
 			//	}
 			//}
 			//Console.WriteLine("----------------------------------------------------------");
-			//Vector<int> pred = na.Predictions(summarize, na.TestSet);
+			Vector<int> pred = na.Predictions(summarize, na.TestSet);
 			//foreach (var item in pred)
 			//{
 			//	Console.Write(item + " ");
 			//}
-			//Console.WriteLine();
-			//Console.WriteLine("Accuracy : " + na.Accuracy(na.TestSet, pred).ToString("0.00") + "%");
+			Console.WriteLine();
+			Console.WriteLine("Accuracy : " + na.Accuracy(na.TestSet, pred).ToString("0.00") + "%");
 
 
 
