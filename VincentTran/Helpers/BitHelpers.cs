@@ -38,11 +38,28 @@ namespace VincentTran.Helpers
 			return res;
 		}
 
-		/// <summary>
-		/// Checks that bit is present in mask. 
-		/// Parameters: A 32-bit signed integer and a number (bit)
+        /// <summary>
+		/// Counts the number of zero bits in non-negative number. 
+		/// Parameters: A 64-bit signed integer.
 		/// </summary>
-		public static bool BitInMask(this int mask, int bit) => (mask & (1 << bit)) != 0;
+		public static int CountBitsZero(this long x)
+        {
+            if (x < 0) throw new Exception("Can't count bits in negative number");
+            int res = 0;
+            int len = (int)Math.Log(x) / (int)Math.Log(2);
+            for (int i = 0; i <= len; i++)
+            {
+                long k = ((x >> i) & 1);
+                if (k == 0) res++;
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// Checks that bit is present in mask. 
+        /// Parameters: A 32-bit signed integer and a number (bit)
+        /// </summary>
+        public static bool BitInMask(this int mask, int bit) => (mask & (1 << bit)) != 0;
 
 		/// <summary>
 		/// Checks that bit is present in mask. 
