@@ -17,3 +17,13 @@ D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\Newtonsoft.Json.x
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.dll
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.pdb
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.csprojResolveAssemblyReference.cache
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\VincentTran.dll.config
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\VincentTran.dll
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\VincentTran.pdb
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\Newtonsoft.Json.dll
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\bin\Debug\Dapper.xml
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.csprojAssemblyReference.cache
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.csproj.CoreCompileInputs.cache
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.csproj.CopyComplete
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.dll
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTran\obj\Debug\VincentTran.pdb

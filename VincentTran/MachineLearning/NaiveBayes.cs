@@ -8,6 +8,8 @@ namespace VincentTran.MachineLearning
 	{
 		public Vector<Vector<double>> TrainingSet { get; set; }
 		public Vector<Vector<double>> TestSet { get; set; }
+        public int MaxSize = 2;
+
 		public NaiveBayes()
 		{
 			TrainingSet = new Vector<Vector<double>>();
@@ -22,6 +24,7 @@ namespace VincentTran.MachineLearning
 				var values = item.Split(',');
 				Vector<double> cur = new Vector<double>();
 				foreach (var val in values) cur.Add(double.Parse(val));
+                MaxSize = Math.Max(MaxSize, (int)cur[cur.Count - 1]);
 				if (TrainingSet.Count < limitTraining) TrainingSet.Add(cur);
 				else TestSet.Add(cur);
 			}
@@ -59,10 +62,10 @@ namespace VincentTran.MachineLearning
 			double e = Math.Exp(-Math.Pow(x - avg, 2) / (2 * Math.Pow(s, 2)));
 			return ((double)1.0 / (Math.Sqrt(2 * Math.PI) * s)) * e;
 		}
-		public Vector<Vector<Vector<double>>> separateByClass(Vector<Vector<double>> vector,int num)
+		public Vector<Vector<Vector<double>>> separateByClass(Vector<Vector<double>> vector)
 		{
-			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(num);
-			for (int i = 0; i < num; i++) res[i] = new Vector<Vector<double>>();
+			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(MaxSize + 1);
+			for (int i = 0; i < MaxSize + 1; i++) res[i] = new Vector<Vector<double>>();
 			foreach (var item in vector)
 			{
 				int last = item.Count - 1;
@@ -84,9 +87,9 @@ namespace VincentTran.MachineLearning
 			}
 			return res;
 		}
-		public Vector<Vector<Pair<double, double>>> summarizeByClass(Vector<Vector<double>> vector,int num)
+		public Vector<Vector<Pair<double, double>>> summarizeByClass(Vector<Vector<double>> vector)
 		{
-			var S = separateByClass(vector,num);
+			var S = separateByClass(vector);
 			Vector<Vector<Pair<double, double>>> res = new Vector<Vector<Pair<double, double>>>();
 			foreach (var item in S) res.Add(summarize(item));
 			return res;

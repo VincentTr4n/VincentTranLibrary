@@ -8,3 +8,16 @@ D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Vincen
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Newtonsoft.Json.xml
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.exe
 D:\MyWorkSpace\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.pdb
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.exe.config
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.exe
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTranTestConsole.pdb
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTran.dll
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Newtonsoft.Json.dll
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTran.pdb
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\VincentTran.dll.config
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\bin\Debug\Newtonsoft.Json.xml
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.csprojAssemblyReference.cache
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.csproj.CoreCompileInputs.cache
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.csproj.CopyComplete
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.exe
+D:\New folder_1\CodeC#\VincentTranLibrary\VincentTranTestConsole\obj\Debug\VincentTranTestConsole.pdb

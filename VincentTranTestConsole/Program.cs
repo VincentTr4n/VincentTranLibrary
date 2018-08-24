@@ -63,8 +63,8 @@ namespace VincentTranTestConsole
 			//System.IO.File.WriteAllText("test1.csv", builder.ToString());
 
 
-			NaiveBayes na = new NaiveBayes("data.csv", 700);
-			var summarize = na.summarizeByClass(na.TrainingSet, 2);
+			NaiveBayes na = new NaiveBayes("test1.csv", 19530);
+			var summarize = na.summarizeByClass(na.TrainingSet);
 
 			//foreach (var item in summarize)
 			//{
