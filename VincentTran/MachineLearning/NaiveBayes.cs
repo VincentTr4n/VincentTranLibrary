@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using VincentTran.Algorithms.DataStructures;
 
@@ -8,26 +9,32 @@ namespace VincentTran.MachineLearning
 	{
 		public Vector<Vector<double>> TrainingSet { get; set; }
 		public Vector<Vector<double>> TestSet { get; set; }
-        public int MaxSize = 2;
+        public double[] c;
+
+        public int Count = 2;
 
 		public NaiveBayes()
 		{
 			TrainingSet = new Vector<Vector<double>>();
 			TestSet = new Vector<Vector<double>>();
 		}
-		public NaiveBayes(string fileName,int limitTraining) : this() { LoadData(fileName, limitTraining); }
-		public void LoadData(string fileName, int limitTraining)
+		public NaiveBayes(string fileName, double limitTraining) : this() { LoadData(fileName, limitTraining); }
+		public void LoadData(string fileName, double limitTraining)
 		{
 			var buffer = System.IO.File.ReadAllLines(fileName);
+            int limit = (int)(buffer.Length * limitTraining);
+            HashSet<double> set = new HashSet<double>();
 			foreach (var item in buffer)
 			{
 				var values = item.Split(',');
 				Vector<double> cur = new Vector<double>();
 				foreach (var val in values) cur.Add(double.Parse(val));
-                MaxSize = Math.Max(MaxSize, (int)cur[cur.Count - 1]);
-				if (TrainingSet.Count < limitTraining) TrainingSet.Add(cur);
+                set.Add(cur[cur.Count - 1]);
+				if (TrainingSet.Count < limit) TrainingSet.Add(cur);
 				else TestSet.Add(cur);
 			}
+            Count = set.Count;
+            c = set.ToArray();
 		}
 		public void LoadTest(string fileName)
 		{
@@ -57,6 +64,15 @@ namespace VincentTran.MachineLearning
 			variance /= (vector.Count - 1);
 			return Math.Sqrt(variance);
 		}
+
+        private int getIndexClass(double x)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (x == c[i]) return i;
+            }
+            return 0;
+        }
 		private double calProbability(double x, double avg, double s)
 		{
 			double e = Math.Exp(-Math.Pow(x - avg, 2) / (2 * Math.Pow(s, 2)));
@@ -64,14 +80,14 @@ namespace VincentTran.MachineLearning
 		}
 		public Vector<Vector<Vector<double>>> separateByClass(Vector<Vector<double>> vector)
 		{
-			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(MaxSize + 1);
-			for (int i = 0; i < MaxSize + 1; i++) res[i] = new Vector<Vector<double>>();
+			Vector<Vector<Vector<double>>> res = new Vector<Vector<Vector<double>>>(Count);
+			for (int i = 0; i < Count; i++) res[i] = new Vector<Vector<double>>();
 			foreach (var item in vector)
 			{
 				int last = item.Count - 1;
-				int val = (int)item[last];
+				double val = item[last];
 				//if (res[val] == null) res[val] = new Vector<Vector<double>>();
-				res[val].Add(item);
+				res[getIndexClass(val)].Add(item);
 			}
 			return res;
 		}
@@ -120,13 +136,13 @@ namespace VincentTran.MachineLearning
 			for (int i = 0; i < prob.Count; i++) if (prob[i] == max) { index = i; break; }
 			return index;
 		}
-		public Vector<int> Predictions(Vector<Vector<Pair<double, double>>> summarize, Vector<Vector<double>> vector)
+		public Vector<double> Predictions(Vector<Vector<Pair<double, double>>> summarize, Vector<Vector<double>> vector)
 		{
-			Vector<int> res = new Vector<int>();
-			foreach (var item in vector) res.Add(predict(summarize, item));
+			Vector<double> res = new Vector<double>();
+			foreach (var item in vector) res.Add(c[predict(summarize, item)]);
 			return res;
 		}
-		public double Accuracy(Vector<Vector<double>> input, Vector<int> pred)
+        public double Accuracy(Vector<Vector<double>> input, Vector<double> pred)
 		{
 			int acc = 0, last = input[0].Count - 1;
 			for (int i = 0; i < pred.Count; i++) if (input[i][last] == pred[i]) acc++;
